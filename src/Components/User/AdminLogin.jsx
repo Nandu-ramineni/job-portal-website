@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { auth } from '../../firebase';
-
-const AdminLogin = ({ onLoginSuccess }) => {
+import { IoMdClose } from "react-icons/io";
+const AdminLogin = ({ onLoginSuccess,onCloseForm }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -21,7 +21,15 @@ const AdminLogin = ({ onLoginSuccess }) => {
 
   return (
     <div className="max-w-lg mx-auto bg-gray-50 py-4 px-4 mb-4 rounded-lg">
-      <h2 className="text-2xl pt-1 font-semibold text-green-500 mb-4 text-center">Admin Login</h2>
+      <div className="text-2xl pt-1 font-semibold text-green-500 mb-4 flex justify-between text-center">
+      <h2 >Admin Login <button
+                            type="button"
+                            onClick={onCloseForm}
+                            className="text-2xl text-[#FF9843] hover:text-[#FF004D]"
+                        >
+                            <IoMdClose />
+                        </button></h2>
+                </div>
       <form onSubmit={handleLogin}>
         <div className="mb-4">
           <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
