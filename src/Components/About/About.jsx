@@ -4,7 +4,7 @@ import categoriesData from './categoriesData'
 import testimonialsData from './TestimonialsData'
 const About = () => {
   const bannerStyle = {
-    backgroundImage: 'linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url("https://firebasestorage.googleapis.com/v0/b/portfolio-6467b.appspot.com/o/bg.jpg?alt=media&token=d4534a4b-04e0-4345-ba1e-e15890523c0a")',
+    backgroundImage: 'linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url("https://firebasestorage.googleapis.com/v0/b/portfolio-6467b.appspot.com/o/bg-min.jpg?alt=media&token=9aaf366f-3df2-4c96-a6b7-3ca2e1011c6f")',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     height: '600px',

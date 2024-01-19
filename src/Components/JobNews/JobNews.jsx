@@ -68,7 +68,7 @@ const JobNews = ({ fetchJobsByLogo }) => {
   };
 
   return (
-    <div className="bg-white h-auto flex justify-center items-center">
+    <div className="bg-white h-auto flex justify-center items-center overflow-hidden">
       <div className="container mx-auto">
         <h2 className="text-2xl font-medium my-4 text-center">Top Companies Hiring</h2>
         <Slider {...sliderSettings} className="mx-auto">

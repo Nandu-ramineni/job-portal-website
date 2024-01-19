@@ -36,7 +36,7 @@ function Home() {
       setCustomSearch(true)
       const tempJobs = [];
       const jobsRef = collection(db, "jobs");
-      let q = query(jobsRef, orderBy("postedOn", "desc"));
+      let q = query(jobsRef);
       // Add where clauses only for the selected search criteria
       if (jobSearch.type) {
         q = query(q, where("type", "==", jobSearch.type));
@@ -138,7 +138,7 @@ function Home() {
       <Searchbar fetchJobsCustom={fetchJobsCustom} />
       {customSearch &&
         <button onClick={fetchJobs} className='flex  mb-2'>
-          <p className='bg-blue-500 px-10 py-2 rounded-md text-white right-8'>Clear Filters</p>
+          <p className='bg-blue-500 px-10 py-2 ml-10 text-center rounded-md text-white right-8'>Clear Filters</p>
         </button>}
       {noJobsFoundMessage && <p className='flex justify-center text-3xl h-20 text-white'>No jobs found. Sorry🥺.</p>}
 
@@ -166,6 +166,7 @@ function Home() {
         </div>
         <div className="block justify-center lg:w-1/3 mx-4 "> {/* Adjust the width based on your layout */}
           <JobTittlebar fetchJobsByTitle={fetchJobsByTitle} />
+          
           <ShortNews/>
         </div>
       </div>

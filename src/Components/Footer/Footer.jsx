@@ -58,25 +58,32 @@ const Footer = () => {
                     ))}
                 </div>
             </div>
-            <div className="block ">
-                    <div className="block justify-between gap-4">
-                        <GooglePlayButton className="bg-white text-black text-xs py-5 mb-2" height={60} direction={"row"} width={200} />
-                        <AppStoreButton className="bg-white text-black" height={60} direction={"row"} width={200}/>
-                    </div>
-                <label htmlFor="" className="block mb-2 text-gray-300 mr-4">
-                    Stay up to date
-                </label>
-                <div className="flex">
-                    <input
-                        type="email"
-                        name=""
-                        id=""
-                        placeholder="Enter Your Email"
-                        className="px-4 py-2 rounded-l-md focus:outline-none"
-                    />
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded-r-md">Subscribe</button>
-                </div>
-            </div>
+            <div className="block">
+    <div className="block md:flex justify-between gap-4">
+        <div className="mb-2">
+            <GooglePlayButton className="bg-white text-black text-xs py-5 mb-2" height={60} direction={"row"} width={200} />
+        </div>
+        <div className="mb-2">
+            <AppStoreButton className="bg-white text-black" height={60} direction={"row"} width={200} />
+        </div>
+    </div>
+
+    <label htmlFor="" className="block mb-2 text-gray-300 mr-4">
+        Stay up to date
+    </label>
+    
+    <div className="flex flex-col md:flex-row">
+        <input
+            type="email"
+            name=""
+            id=""
+            placeholder="Enter Your Email"
+            className="mb-2 md:mr-2 px-4 py-2 rounded-md focus:outline-none"
+        />
+        <button className="bg-blue-500 text-white px-4 py-2 rounded-md">Subscribe</button>
+    </div>
+</div>
+
             
         </div>
         </footer>

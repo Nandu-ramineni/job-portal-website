@@ -1,71 +1,58 @@
+// Login.jsx
 import React, { useState } from 'react';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase';
+import { FcManager } from "react-icons/fc";
+import { CiMail } from "react-icons/ci";
+import { PiPasswordThin } from "react-icons/pi";
 import { IoMdClose } from "react-icons/io";
-const AdminLogin = ({ onLoginSuccess,onCloseForm }) => {
+const Login = ({handleAdminLogin, onCloseForm}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const handleLogin = async (e) => {
+  const [loginError, setLoginError] = useState(null);
+  
+  const onLogin = (e) => {
     e.preventDefault();
-
-    try {
-      // Sign in with email and password
-      await auth.signInWithEmailAndPassword(email, password);
-
-      // Trigger the parent component that login was successful
-      onLoginSuccess();
-    } catch (error) {
-      console.error('Error logging in: ', error);
-    }
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        // If login is successful, update isAdminLoggedIn
+        handleAdminLogin();
+        
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        setLoginError("email/password is invalid");
+        console.error(errorMessage);
+      });
   };
-
+  
   return (
-    <div className="max-w-lg mx-auto bg-gray-50 py-4 px-4 mb-4 rounded-lg">
-      <div className="text-2xl pt-1 font-semibold text-green-500 mb-4 flex justify-between text-center">
-      <h2 >Admin Login <button
-                            type="button"
-                            onClick={onCloseForm}
-                            className="text-2xl text-[#FF9843] hover:text-[#FF004D]"
-                        >
-                            <IoMdClose />
-                        </button></h2>
-                </div>
-      <form onSubmit={handleLogin}>
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
-            Email:
-          </label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-2 border rounded"
-            required
-          />
+    <div className="block items-center justify-center md:w-full">
+      
+        <div className="flex justify-between text-center mb-4">
+          <h1 className="flex justify-center gap-2 items-center text-2xl font-extrabold text-green-500"><FcManager className='text-2xl' />Admin Login</h1>
+          <button type="button" onClick={onCloseForm} className="text-2xl text-[#FF9843] hover:text-[#FF004D]" ><IoMdClose /> </button>
         </div>
-        <div className="mb-4">
-          <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
-            Password:
-          </label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-2 border rounded"
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="bg-green-500 hover:bg-blue-700 text-white font-medium py-2 px-8 rounded-full mx-auto block"
-        >
-          Login
-        </button>
-      </form>
+        <form className="mt-8 w-full" onSubmit={onLogin}>
+          <div className="mb-4">
+            <label htmlFor="email" className="flex justify-center gap-2 items-center text-md font-medium text-gray-600"><CiMail /> Email address</label>
+            <input id="email" name="email" type="email" required className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300" placeholder="Email address" onChange={(e) => setEmail(e.target.value)}/>
+          </div>
+          <div className="mb-4">
+            <label htmlFor="password" className="flex justify-center gap-2 items-center text-md font-medium text-gray-600"><PiPasswordThin /> Password</label>
+            <input id="password" name="password" type="password" required className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300" placeholder="Password" onChange={(e) => setPassword(e.target.value) }/>
+          </div>
+          {loginError && <p className="text-red-500 text-sm mb-4">{loginError}</p>}
+          <div className="text-center">
+            <button type="submit" class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Login</button>
+          </div>
+          <p className='text-center text-red-600'>Note: Only admin can post a job</p>
+        </form>
+      
     </div>
   );
 };
-
-export default AdminLogin;
+export default Login;

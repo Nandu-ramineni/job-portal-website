@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { db,auth} from '../../firebase';
+import { db} from '../../firebase';
 import { addDoc, collection,getDocs} from "firebase/firestore"; 
 import { serverTimestamp } from "firebase/firestore";
 import { IoMdClose } from "react-icons/io";
-import AdminLogin from '../User/AdminLogin';
-const CreateJob = ({ onCloseForm }) => {
-    const [isAdmin, setIsAdmin] = useState(false);
-    const [loggedIn, setLoggedIn] = useState(false);
+import Login from '../User/AdminLogin';
+const CreateJob = ({ onCloseForm  }) => {
     const [jobdetails,setjobDetails]=useState({
         title:'',
         company:'',
@@ -21,27 +19,9 @@ const CreateJob = ({ onCloseForm }) => {
     })
     const {title,company,type,experience,location,skills,salary,job_link,logo}=jobdetails;
     const [customSkill, setCustomSkill] = useState('');
-    const checkAdminStatus = async () => {
-        try {
-            const user = auth.currentUser;
-            if (user) {
-                // Check if the authenticated user is an admin
-                const idTokenResult = await user.getIdTokenResult();
-                setIsAdmin(idTokenResult.claims.admin);
-                setLoggedIn(true)
-            } else {
-                setIsAdmin(false);
-                setLoggedIn(false);
-            }
-        } catch (error) {
-            console.error('Error checking admin status: ', error);
-        }
-    };
+    const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+    
     const postJobs = async () => {
-        if (!isAdmin) {
-            console.error('User is not an admin. Cannot post job.');
-            return;
-        }
         try {
             const jobsCollection = collection(db, 'jobs');
             const newJobRef = await addDoc(jobsCollection, {
@@ -84,28 +64,30 @@ const CreateJob = ({ onCloseForm }) => {
             setCustomSkill('');
         }
     };
-    const submitHandler = (e) => {
+    
+    const handleAdminLogin = () => {
+        // Perform login logic
+        // If login is successful, set isAdminLoggedIn to true
+        setIsAdminLoggedIn(true);
+      };
+    const submitHandler = async(e) => {
         e.preventDefault();
-        postJobs();
+        
+        await postJobs(); // Post the job
+
+        // Close the form
+        onCloseForm();
     };
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((user) => {
-            if (user) {
-                checkAdminStatus(); // Check admin status if a user is authenticated
-            }
-        });
-        return () => {
-            unsubscribe(); // Cleanup the subscription when the component is unmounted
-        };
+        
     }, []);
-    const handleLoginSuccess = () => {
-        setLoggedIn(true);
-    };
+    
     return (
-        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-lg shadow-md z-50">
-            {loggedIn ? (
-            <form className="max-w-lg mx-auto bg-gray-50 py4 px-4 mb-4 rounded-lg"onSubmit={submitHandler}>
+        <div className="fixed top-1/2 right-8 transform  -translate-y-1/2 bg-white p-8 rounded-lg shadow-md z-50  ">
+            {isAdminLoggedIn ? (
+            <form className="max-w-lg mx-auto bg-gray-50 py-4 px-4 mb-4 rounded-lg sm:w-full"
+            onSubmit={submitHandler}>
                 <div className="text-2xl pt-1 font-semibold text-green-500 mb-4 flex justify-between text-center">
                     <h2>Post a job</h2>
                     <button
@@ -219,8 +201,10 @@ const CreateJob = ({ onCloseForm }) => {
                 </div>
             </form>
             ) : (
-                <AdminLogin onLoginSuccess={handleLoginSuccess} />
-              )}
+                <div className="text-center">
+                    <Login handleAdminLogin={handleAdminLogin} onCloseForm={onCloseForm } />
+                </div>
+            )}
         </div>
     )
 }
