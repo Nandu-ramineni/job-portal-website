@@ -8,8 +8,7 @@ JobVista is a comprehensive job search platform that aims to simplify the job-se
 
 ## Project Structure
 
-The project is organized with the following structure:
-
+```
 .
 ├── public/
 │ └── index.html
@@ -30,7 +29,7 @@ The project is organized with the following structure:
 ├── .gitignore
 ├── README.md
 └── ... (other project files)
-
+```
 
 ## Features
 
@@ -88,26 +87,39 @@ Before you begin, ensure you have the following installed:
 ```bash
 git clone https://github.com/your-username/jobvista.git
 cd jobvista
-**Install Dependencies**
-  npm install
+npm install
+```
 
-**##Setup the firebase**
-1.Create a Firebase project at Firebase Console.
-2.Obtain your Firebase project configuration.
-3.Create a `.env` file in the project root and add your Firebase configuration:
-  REACT_APP_FIREBASE_API_KEY=your-api-key
-  REACT_APP_FIREBASE_AUTH_DOMAIN=your-auth-domain
-  REACT_APP_FIREBASE_PROJECT_ID=your-project-id
-  REACT_APP_FIREBASE_STORAGE_BUCKET=your-storage-bucket
-  REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
-  REACT_APP_FIREBASE_APP_ID=your-app-id
-Replace your-api-key, your-auth-domain, etc., with your actual Firebase project details.
+## Firebase Configuration
 
-Run the Application:
-** npm start**
- Visit http://localhost:3000 in your web browser to view the application.
-Build for Production:
- **npm run build**
+1. Create a Firebase project at Firebase Console.
+2. Obtain your Firebase project configuration.
+3. Create a `.env` file in the project root and add your Firebase configuration:
+
+   ```
+   REACT_APP_FIREBASE_API_KEY=your-api-key
+   REACT_APP_FIREBASE_AUTH_DOMAIN=your-auth-domain
+   REACT_APP_FIREBASE_PROJECT_ID=your-project-id
+   REACT_APP_FIREBASE_STORAGE_BUCKET=your-storage-bucket
+   REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
+   REACT_APP_FIREBASE_APP_ID=your-app-id
+   ```
+
+   Replace `your-api-key`, `your-auth-domain`, etc., with your actual Firebase project details.
+
+## Run the Application
+
+```bash
+npm start
+```
+
+Visit [http://localhost:3000](http://localhost:3000) in your web browser to view the application.
+
+## Build for Production
+
+```bash
+npm run build
+```
 
 ## Deployed Version
 
