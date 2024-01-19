@@ -1,6 +1,6 @@
 # JobVista
 
-![JobVista Logo]("https://firebasestorage.googleapis.com/v0/b/portfolio-6467b.appspot.com/o/Job%20offers-rafiki.png?alt=media&token=64c4b2d9-4fba-401f-87f4-3296c6d1580f")
+![JobVista Logo](https://firebasestorage.googleapis.com/v0/b/portfolio-6467b.appspot.com/o/Job%20offers-rafiki.png?alt=media&token=64c4b2d9-4fba-401f-87f4-3296c6d1580f)
 
 ## Overview
 
@@ -90,7 +90,8 @@ git clone https://github.com/your-username/jobvista.git
 cd jobvista
 **Install Dependencies**
   npm install
-##Set Up Firebase
+
+**##Setup the firebase**
 1.Create a Firebase project at Firebase Console.
 2.Obtain your Firebase project configuration.
 3.Create a `.env` file in the project root and add your Firebase configuration:
