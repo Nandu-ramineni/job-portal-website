@@ -6,6 +6,7 @@ import About from '../About/About';
 import Home from '../Home/Home';
 import Contact from '../Contact/Contact';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import { FaWhatsapp } from "react-icons/fa6";
 const Navbar = ({onPostJobClick}) => {
     const [isNavOpen, setIsNavOpen] = useState(false);
     const toggleNav = () => {
@@ -68,6 +69,17 @@ const Navbar = ({onPostJobClick}) => {
                 </div>
                 
             </nav>
+            <div className="text-4xl fixed bottom-8 right-6 bg-green-500 text-white rounded-lg px-2 py-2">
+                <a
+                    href="https://wa.me/9063730699"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <FaWhatsapp />
+                </a>
+            </div>
+
+
             <Routes>
             <Route path='/' element={<Home/>}/>
                 <Route path='/jobs' element={<Home/>}/>
