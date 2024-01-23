@@ -30,7 +30,7 @@ const Login = ({handleAdminLogin, onCloseForm}) => {
   };
   
   return (
-    <div className="block items-center justify-center md:w-full">
+    <div className="block justify-center items-center m-auto md:w-full">
       
         <div className="flex justify-between text-center mb-4">
           <h1 className="flex justify-center gap-2 items-center text-2xl font-extrabold text-green-500"><FcManager className='text-2xl' />Admin Login</h1>
