@@ -123,7 +123,7 @@ npm run build
 
 ## Deployed Version
 
-Visit [JobVista](https://job-portal-c3290.web.app/). to explore the platform.
+Visit [JobVista](https://jobvesta.netlify.app/). to explore the platform.
 
 ## Contributing
 
