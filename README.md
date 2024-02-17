@@ -73,6 +73,10 @@ JobVista is a comprehensive job search platform that aims to simplify the job-se
 - **Additional Search Criteria:**
   - Expand search criteria for more advanced filters.
 
+## Images:
+![jobvista](https://github.com/Nandu-ramineni/job-portal-website/assets/123319320/fcb9de8d-c039-4a59-aca5-854aa05af1c8)
+![image](https://github.com/Nandu-ramineni/job-portal-website/assets/123319320/9c401428-7f5c-474b-b483-a2a0ee3c5969)
+
 # JobVista - Installation Guide
 
 ## Prerequisites
