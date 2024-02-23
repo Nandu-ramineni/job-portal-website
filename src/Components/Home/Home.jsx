@@ -11,10 +11,12 @@ import ShortNews from '../JobNews/ShortNews';
 function Home() {
   const [jobs, setJobs] = useState([])
   const [customSearch, setCustomSearch] = useState(false)
+  const [loading, setLoading] = useState(true); // State variable to track loading state
   const [noJobsFoundMessage, setNoJobsFoundMessage] = useState(false)
   const [currentPage, setCurrentPage] = useState(1);
   const jobsPerPage = 6;
   const fetchJobs = async () => {
+    setLoading(true);
     setCustomSearch(false)
     setNoJobsFoundMessage(false)
     const tempJobs = []
@@ -30,6 +32,7 @@ function Home() {
       })
     });
     setJobs(tempJobs);
+    setLoading(false); // Set loading state to false after fetching data
   }
   const fetchJobsCustom = async (jobSearch) => {
     try {
@@ -136,6 +139,7 @@ function Home() {
     <div>
       <Header />
       <Searchbar fetchJobsCustom={fetchJobsCustom} />
+      {loading && <p id="loader"></p>}
       {customSearch &&
         <button onClick={fetchJobs} className='flex  mb-2'>
           <p className='bg-blue-500 px-10 py-2 ml-10 text-center rounded-md text-white right-8'>Clear Filters</p>
@@ -151,11 +155,9 @@ function Home() {
         <button
           className="flex justify-center items-center text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
           onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
+          disabled={currentPage === 1}>
           &larr; Prev
         </button>
-
         <button
           className="flex justify-center items-center text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
           onClick={() => handlePageChange(currentPage + 1)}
@@ -163,7 +165,7 @@ function Home() {
           Next &rarr;
         </button>
       </div>
-        </div>
+      </div>
         <div className="block justify-center lg:w-1/3 mx-4 "> {/* Adjust the width based on your layout */}
           <JobTittlebar fetchJobsByTitle={fetchJobsByTitle} />
           
